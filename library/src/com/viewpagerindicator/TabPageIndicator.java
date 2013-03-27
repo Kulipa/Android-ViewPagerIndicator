@@ -16,7 +16,10 @@
  */
 package com.viewpagerindicator;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -26,9 +29,6 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
  * This widget implements the dynamic action bar tab behavior that can change
@@ -148,6 +148,11 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
             removeCallbacks(mTabSelector);
         }
     }
+    
+    private static Typeface tf_cache = null;
+        public static void setTypeface(Typeface tf){
+          tf_cache = tf;
+    }
 
     private void addTab(int index, CharSequence text, int iconResId) {
         final TabView tabView = new TabView(getContext());
@@ -155,6 +160,9 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         tabView.setFocusable(true);
         tabView.setOnClickListener(mTabClickListener);
         tabView.setText(text);
+        if(tf_cache != null){
+        	tabView.setTypeface(tf_cache);
+        }
 
         if (iconResId != 0) {
             tabView.setCompoundDrawablesWithIntrinsicBounds(iconResId, 0, 0, 0);
