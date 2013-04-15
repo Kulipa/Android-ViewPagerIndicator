@@ -149,8 +149,8 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         }
     }
     
-    private static Typeface tf_cache = null;
-        public static void setTypeface(Typeface tf){
+    private Typeface tf_cache = null;
+    public void setTypeface(Typeface tf){
           tf_cache = tf;
     }
 
